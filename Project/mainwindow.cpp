@@ -10,35 +10,17 @@
 #include <fstream>
 #include <QtCore/QFile>
 #include <QtCore/QTextStream>
+#include <QDir>
 
 double num_first;
-int reg_date = 0;
+QString reg_date = "0";
+QString reg_mount = "0";
+QString reg_year = "0";
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-    connect(ui->pushButton_0,SIGNAL(clicked()),this,SLOT(digits_numbers()));
-    connect(ui->pushButton_1,SIGNAL(clicked()),this,SLOT(digits_numbers()));
-    connect(ui->pushButton_2,SIGNAL(clicked()),this,SLOT(digits_numbers()));
-    connect(ui->pushButton_3,SIGNAL(clicked()),this,SLOT(digits_numbers()));
-    connect(ui->pushButton_4,SIGNAL(clicked()),this,SLOT(digits_numbers()));
-    connect(ui->pushButton_5,SIGNAL(clicked()),this,SLOT(digits_numbers()));
-    connect(ui->pushButton_6,SIGNAL(clicked()),this,SLOT(digits_numbers()));
-    connect(ui->pushButton_7,SIGNAL(clicked()),this,SLOT(digits_numbers()));
-    connect(ui->pushButton_8,SIGNAL(clicked()),this,SLOT(digits_numbers()));
-    connect(ui->pushButton_9,SIGNAL(clicked()),this,SLOT(digits_numbers()));
-    connect(ui->pushButton_plusminus,SIGNAL(clicked()),this,SLOT(operations()));
-    connect(ui->pushButton_proc,SIGNAL(clicked()),this,SLOT(operations()));
-    connect(ui->pushButton_eq,SIGNAL(clicked()),this,SLOT(math_operations()));
-    connect(ui->pushButton_plus,SIGNAL(clicked()),this,SLOT(math_operations()));
-    connect(ui->pushButton_minus,SIGNAL(clicked()),this,SLOT(math_operations()));
-    connect(ui->pushButton_pros,SIGNAL(clicked()),this,SLOT(math_operations()));
-    ui->pushButton_eq->setCheckable(true);
-    ui->pushButton_plus->setCheckable(true);
-    ui->pushButton_minus->setCheckable(true);
-    ui->pushButton_pros->setCheckable(true);
 
     connect(ui->date_1,SIGNAL(clicked()),this,SLOT(date_select()));
     ui->date_1->setCheckable(true);
@@ -46,6 +28,62 @@ MainWindow::MainWindow(QWidget *parent)
     ui->date_2->setCheckable(true);
     connect(ui->date_3,SIGNAL(clicked()),this,SLOT(date_select()));
     ui->date_3->setCheckable(true);
+    connect(ui->date_4,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_4->setCheckable(true);
+    connect(ui->date_5,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_5->setCheckable(true);
+    connect(ui->date_6,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_6->setCheckable(true);
+    connect(ui->date_7,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_7->setCheckable(true);
+    connect(ui->date_8,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_8->setCheckable(true);
+    connect(ui->date_9,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_9->setCheckable(true);
+    connect(ui->date_10,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_10->setCheckable(true);
+    connect(ui->date_11,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_11->setCheckable(true);
+    connect(ui->date_12,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_12->setCheckable(true);
+    connect(ui->date_13,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_13->setCheckable(true);
+    connect(ui->date_14,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_14->setCheckable(true);
+    connect(ui->date_15,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_15->setCheckable(true);
+    connect(ui->date_16,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_16->setCheckable(true);
+    connect(ui->date_17,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_17->setCheckable(true);
+    connect(ui->date_18,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_18->setCheckable(true);
+    connect(ui->date_19,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_19->setCheckable(true);
+    connect(ui->date_20,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_20->setCheckable(true);
+    connect(ui->date_21,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_21->setCheckable(true);
+    connect(ui->date_22,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_22->setCheckable(true);
+    connect(ui->date_23,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_23->setCheckable(true);
+    connect(ui->date_24,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_24->setCheckable(true);
+    connect(ui->date_25,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_25->setCheckable(true);
+    connect(ui->date_26,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_26->setCheckable(true);
+    connect(ui->date_27,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_27->setCheckable(true);
+    connect(ui->date_28,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_28->setCheckable(true);
+    connect(ui->date_29,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_29->setCheckable(true);
+    connect(ui->date_30,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_30->setCheckable(true);
+    connect(ui->date_31,SIGNAL(clicked()),this,SLOT(date_select()));
+    ui->date_31->setCheckable(true);
 }
 
 MainWindow::~MainWindow()
@@ -53,182 +91,67 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::digits_numbers()
-{
-   QPushButton *button = (QPushButton *) sender();
-   double all_numbers;
-   QString new_label;
-   if((ui->result_show->text().contains("."))&&(button->text()=="0"))
-   {
-       new_label = ui->result_show->text()+button->text();
-   }else{
-   all_numbers = (ui->result_show->text() + button->text()).toDouble();
-   new_label = QString::number(all_numbers,'g',15);}
-   ui->result_show->setText(new_label);
-}
-
-void MainWindow::on_pushButton_dot_clicked()
-{
-    if (!(ui->result_show->text().contains('.')))
-    ui->result_show->setText(ui->result_show->text() + ".");
-
-}
-
-void MainWindow::operations()
-{
-   QPushButton *button = (QPushButton *) sender();
-
-   double all_numbers;
-   QString new_label;
-
-   if (button->text()=="+/-")
-   {
-   all_numbers = (ui->result_show->text()).toDouble();
-   all_numbers = all_numbers * -1;
-   new_label = QString::number(all_numbers,'g',15);
-   }
-   if (button->text()=="%")
-   {
-   all_numbers = (ui->result_show->text()).toDouble();
-   all_numbers = all_numbers * 0.01;
-   new_label = QString::number(all_numbers,'g',15);
-   }
-   ui->result_show->setText(new_label);
-}
-
-void MainWindow::on_pushButton_delete_clicked()
-{
-ui->pushButton_plus->setChecked(false);
-ui->pushButton_minus->setChecked(false);
-ui->pushButton_eq->setChecked(false);
-ui->pushButton_pros->setChecked(false);
-ui->result_show->setText("0");
-}
-
-void MainWindow::math_operations()
-{
-   QPushButton *button = (QPushButton *) sender();
-   num_first=ui->result_show->text().toDouble();
-   //if(ui->pushButton_plus->isChecked())ui->result_show->setText("+");
-   //if(ui->pushButton_minus->isChecked())ui->result_show->setText("-");
-   //if(ui->pushButton_pros->isChecked())ui->result_show->setText("*");
-   //if(ui->pushButton_eq->isChecked())ui->result_show->setText("/");
-   ui->result_show->setText("");
-   button->setChecked(true);
-}
-
-
-
-void MainWindow::on_pushButton_res_clicked()
-{
-    double label_number, num_second;
-    QString new_label;
-    num_second=ui->result_show->text().toDouble();
-    if(ui->pushButton_plus->isChecked()){
-
-        label_number=num_first+num_second;
-        new_label = QString::number(label_number,'g',15);
-        ui->result_show->setText(new_label);
-        ui->pushButton_plus->setChecked(false);
-    }
-    else if(ui->pushButton_minus->isChecked()){
-
-        label_number=num_first-num_second;
-        new_label = QString::number(label_number,'g',15);
-        ui->result_show->setText(new_label);
-        ui->pushButton_minus->setChecked(false);
-    }
-    else if(ui->pushButton_eq->isChecked()){
-        if (num_second==0){ui->result_show->setText("0");}
-        else {
-        label_number=num_first/num_second;
-        new_label = QString::number(label_number,'g',15);
-        ui->result_show->setText(new_label);
-        ui->pushButton_eq->setChecked(false);
-        }
-    }
-    else if(ui->pushButton_pros->isChecked()){
-
-        label_number=num_first*num_second;
-        new_label = QString::number(label_number,'g',15);
-        ui->result_show->setText(new_label);
-        ui->pushButton_pros->setChecked(false);
-    }
-}
-
-
-void MainWindow::on_pushButton_eq_clicked()
-{
-
-}
 
 void MainWindow::date_select()
 {
 
- if (ui->date_1->isChecked())
- {
+QDir().mkpath("dates");
 
-     reg_date = 1; //сохранение индекса дня
-
-     QFile inputFile("1.txt"); //вывод файла
-     inputFile.open(QIODevice::ReadOnly);
+ if (ui->date_1->isChecked())reg_date = "1"; if (ui->date_2->isChecked())reg_date = "2";
+ if (ui->date_3->isChecked())reg_date = "3"; if (ui->date_4->isChecked())reg_date = "4";
+ if (ui->date_5->isChecked())reg_date = "5"; if (ui->date_6->isChecked())reg_date = "6";
+ if (ui->date_7->isChecked())reg_date = "7"; if (ui->date_8->isChecked())reg_date = "8";
+ if (ui->date_9->isChecked())reg_date = "9"; if (ui->date_10->isChecked())reg_date = "10";
+ if (ui->date_11->isChecked())reg_date = "11"; if (ui->date_12->isChecked())reg_date = "12";
+ if (ui->date_13->isChecked())reg_date = "13"; if (ui->date_14->isChecked())reg_date = "14";
+ if (ui->date_15->isChecked())reg_date = "15"; if (ui->date_16->isChecked())reg_date = "16";
+ if (ui->date_17->isChecked())reg_date = "17"; if (ui->date_18->isChecked())reg_date = "18";
+ if (ui->date_19->isChecked())reg_date = "19"; if (ui->date_20->isChecked())reg_date = "20";
+ if (ui->date_21->isChecked())reg_date = "21"; if (ui->date_22->isChecked())reg_date = "22";
+ if (ui->date_23->isChecked())reg_date = "23"; if (ui->date_24->isChecked())reg_date = "24";
+ if (ui->date_25->isChecked())reg_date = "25"; if (ui->date_26->isChecked())reg_date = "26";
+ if (ui->date_27->isChecked())reg_date = "27"; if (ui->date_28->isChecked())reg_date = "28";
+ if (ui->date_29->isChecked())reg_date = "29"; if (ui->date_30->isChecked())reg_date = "30";
+ if (ui->date_31->isChecked())reg_date = "31"; //индексирование дней
+     reg_mount = ui->mount->text();
+     reg_year = ui->year->text();
+     QString fname = "dates/"+ reg_date + reg_mount + reg_year+".txt";
+     QFile inputFile(fname); //вывод файла
+     inputFile.open(QIODevice::ReadWrite | QIODevice::Text);
      QTextStream in(&inputFile);//перевод текст в line
      QString line = in.readAll();
      inputFile.close();//закрываем файл
 
      ui->text_read->setText(line);//устанавливаем для чтения
      ui->text_edit->setPlainText(line);//устанавливаем для изменения
- }
- if (ui->date_2->isChecked())
- {
-     reg_date = 2;
-     QFile inputFile("2.txt"); //вывод файла
-     inputFile.open(QIODevice::ReadOnly);
-     QTextStream in(&inputFile);//перевод текст в line
-     QString line = in.readAll();
-     inputFile.close();//закрываем файл
-     ui->text_read->setText(line);//устанавливаем для чтения
-     ui->text_edit->setPlainText(line);//устанавливаем для изменения
- }
- if (ui->date_3->isChecked())
- {
-     reg_date = 3;
-     QFile inputFile("3.txt"); //вывод файла
-     inputFile.open(QIODevice::ReadOnly);
-     QTextStream in(&inputFile);//перевод текст в line
-     QString line = in.readAll();
-     inputFile.close();//закрываем файл
-     ui->text_read->setText(line);//устанавливаем для чтения
-     ui->text_edit->setPlainText(line);//устанавливаем для изменения
- }
- ui->date_3->setChecked(false);ui->date_2->setChecked(false);ui->date_1->setChecked(false);
+
+
+ //закрываем нажатие
+ ui->date_1->setChecked(false);ui->date_2->setChecked(false);ui->date_3->setChecked(false);
+  ui->date_4->setChecked(false);ui->date_5->setChecked(false);ui->date_6->setChecked(false);
+   ui->date_7->setChecked(false);ui->date_8->setChecked(false);ui->date_9->setChecked(false);
+   ui->date_10->setChecked(false);
+   ui->date_11->setChecked(false);ui->date_12->setChecked(false);ui->date_13->setChecked(false);
+    ui->date_14->setChecked(false);ui->date_15->setChecked(false);ui->date_16->setChecked(false);
+     ui->date_17->setChecked(false);ui->date_18->setChecked(false);ui->date_19->setChecked(false);
+     ui->date_20->setChecked(false);
+     ui->date_21->setChecked(false);ui->date_22->setChecked(false);ui->date_23->setChecked(false);
+      ui->date_24->setChecked(false);ui->date_25->setChecked(false);ui->date_26->setChecked(false);
+       ui->date_27->setChecked(false);ui->date_28->setChecked(false);ui->date_29->setChecked(false);
+       ui->date_30->setChecked(false); ui->date_31->setChecked(false);
+
 }
 
 void MainWindow::on_save_button_clicked()
 {
-    if (reg_date==1){
-    QFile save_file("1.txt");
+    QString fname = "dates/"+ reg_date + reg_mount + reg_year+".txt";
+    QFile save_file(fname);
     save_file.open(QIODevice::WriteOnly | QIODevice::Text);
     QString save_text = ui->text_edit->toPlainText();//сохранение измененного текста
     ui->text_read->setText(save_text);
     QTextStream out(&save_file);
     out<<save_text;
-    save_file.close();}
-    else if (reg_date==2){
-        QFile save_file("2.txt");
-        save_file.open(QIODevice::WriteOnly | QIODevice::Text);
-        QString save_text = ui->text_edit->toPlainText();//сохранение измененного текста
-        ui->text_read->setText(save_text);
-        QTextStream out(&save_file);
-        out<<save_text;
-        save_file.close();}
-    else if (reg_date==3){
-        QFile save_file("3.txt");
-        save_file.open(QIODevice::WriteOnly | QIODevice::Text);
-        QString save_text = ui->text_edit->toPlainText();//сохранение измененного текста
-        ui->text_read->setText(save_text);
-        QTextStream out(&save_file);
-        out<<save_text;
-        save_file.close();}
+    save_file.close();
+
 }
 
