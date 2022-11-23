@@ -45,16 +45,21 @@
       <pointsize>16</pointsize>
      </font>
     </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true">QLabel {
   qproperty-alignment: 'AlignVCenter | AlignRight';
   border-bottom: 1px solid gray;
 }
-
 background-color : white;</string>
     </property>
     <property name="text">
      <string>Heeeeelllo! It`s student project orginizer! </string>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="save_button">
