@@ -18,8 +18,10 @@ public:
 private:
     Ui::MainWindow *ui;
 private slots:
-
+    void ClearDate();
     void date_select();
     void on_save_button_clicked();
+    void on_mount_textChanged(const QString &arg1);
+    void on_year_textChanged(const QString &arg1);
 };
 #endif // MAINWINDOW_H

@@ -84,6 +84,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->date_30->setCheckable(true);
     connect(ui->date_31,SIGNAL(clicked()),this,SLOT(date_select()));
     ui->date_31->setCheckable(true);
+
 }
 
 MainWindow::~MainWindow()
@@ -91,12 +92,48 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::ClearDate()
+{
 
+
+          if(reg_date=="1")ui->date_1->setChecked(false);
+          if(reg_date=="2")ui->date_2->setChecked(false);
+          if(reg_date=="3")ui->date_3->setChecked(false);
+          if(reg_date=="4")ui->date_4->setChecked(false);
+          if(reg_date=="5")ui->date_5->setChecked(false);
+          if(reg_date=="6")ui->date_6->setChecked(false);
+          if(reg_date=="7")ui->date_7->setChecked(false);
+          if(reg_date=="8")ui->date_8->setChecked(false);
+          if(reg_date=="9")ui->date_9->setChecked(false);
+          if(reg_date=="10")ui->date_10->setChecked(false);
+          if(reg_date=="11")ui->date_11->setChecked(false);
+          if(reg_date=="12")ui->date_12->setChecked(false);
+          if(reg_date=="13")ui->date_13->setChecked(false);
+          if(reg_date=="14")ui->date_14->setChecked(false);
+          if(reg_date=="15")ui->date_15->setChecked(false);
+          if(reg_date=="16")ui->date_16->setChecked(false);
+          if(reg_date=="17")ui->date_17->setChecked(false);
+          if(reg_date=="18")ui->date_18->setChecked(false);
+          if(reg_date=="19")ui->date_19->setChecked(false);
+          if(reg_date=="20")ui->date_20->setChecked(false);
+          if(reg_date=="21")ui->date_21->setChecked(false);
+          if(reg_date=="22")ui->date_22->setChecked(false);
+          if(reg_date=="23")ui->date_23->setChecked(false);
+          if(reg_date=="24")ui->date_24->setChecked(false);
+          if(reg_date=="25")ui->date_25->setChecked(false);
+          if(reg_date=="26")ui->date_26->setChecked(false);
+          if(reg_date=="27")ui->date_27->setChecked(false);
+          if(reg_date=="28")ui->date_28->setChecked(false);
+          if(reg_date=="29")ui->date_29->setChecked(false);
+          if(reg_date=="30")ui->date_30->setChecked(false);
+          if(reg_date=="31")ui->date_31->setChecked(false);
+          //подсвечиваем текущий день
+}
 void MainWindow::date_select()
 {
 
 QDir().mkpath("dates");
-
+ClearDate();
  if (ui->date_1->isChecked())reg_date = "1"; if (ui->date_2->isChecked())reg_date = "2";
  if (ui->date_3->isChecked())reg_date = "3"; if (ui->date_4->isChecked())reg_date = "4";
  if (ui->date_5->isChecked())reg_date = "5"; if (ui->date_6->isChecked())reg_date = "6";
@@ -125,20 +162,8 @@ QDir().mkpath("dates");
      ui->text_read->setText(line);//устанавливаем для чтения
      ui->text_edit->setPlainText(line);//устанавливаем для изменения
 
+     //ClearDate();//подсвечиваем текущий
 
- //закрываем нажатие
- ui->date_1->setChecked(false);ui->date_2->setChecked(false);ui->date_3->setChecked(false);
-  ui->date_4->setChecked(false);ui->date_5->setChecked(false);ui->date_6->setChecked(false);
-   ui->date_7->setChecked(false);ui->date_8->setChecked(false);ui->date_9->setChecked(false);
-   ui->date_10->setChecked(false);
-   ui->date_11->setChecked(false);ui->date_12->setChecked(false);ui->date_13->setChecked(false);
-    ui->date_14->setChecked(false);ui->date_15->setChecked(false);ui->date_16->setChecked(false);
-     ui->date_17->setChecked(false);ui->date_18->setChecked(false);ui->date_19->setChecked(false);
-     ui->date_20->setChecked(false);
-     ui->date_21->setChecked(false);ui->date_22->setChecked(false);ui->date_23->setChecked(false);
-      ui->date_24->setChecked(false);ui->date_25->setChecked(false);ui->date_26->setChecked(false);
-       ui->date_27->setChecked(false);ui->date_28->setChecked(false);ui->date_29->setChecked(false);
-       ui->date_30->setChecked(false); ui->date_31->setChecked(false);
 
 }
 
@@ -153,5 +178,30 @@ void MainWindow::on_save_button_clicked()
     out<<save_text;
     save_file.close();
 
+}
+
+
+void MainWindow::on_mount_textChanged(const QString &arg1)
+{
+    if (ui->mount->text()=="1"){ui->date_29->show();ui->date_30->show();ui->date_31->show();}
+    if (ui->mount->text()=="2"){if (ui->year->text().toInt()%4==0)ui->date_29->show();else ui->date_29->hide();
+        ui->date_30->hide();ui->date_31->hide();}
+    if (ui->mount->text()=="3"){ui->date_29->show();ui->date_30->show();ui->date_31->show();}
+    if (ui->mount->text()=="4"){ui->date_29->show();ui->date_30->show();ui->date_31->hide();}
+    if (ui->mount->text()=="5"){ui->date_29->show();ui->date_30->show();ui->date_31->show();}
+    if (ui->mount->text()=="6"){ui->date_29->show();ui->date_30->show();ui->date_31->hide();}
+    if (ui->mount->text()=="7"){ui->date_29->show();ui->date_30->show();ui->date_31->show();}
+    if (ui->mount->text()=="8"){ui->date_29->show();ui->date_30->show();ui->date_31->show();}
+    if (ui->mount->text()=="9"){ui->date_29->show();ui->date_30->show();ui->date_31->hide();}
+    if (ui->mount->text()=="10"){ui->date_29->show();ui->date_30->show();ui->date_31->show();}
+    if (ui->mount->text()=="11"){ui->date_29->show();ui->date_30->show();ui->date_31->hide();}
+    if (ui->mount->text()=="12"){ui->date_29->show();ui->date_30->show();ui->date_31->show();}
+}
+
+
+void MainWindow::on_year_textChanged(const QString &arg1)
+{
+    if (ui->mount->text()=="2"){if (ui->year->text().toInt()%4==0)ui->date_29->show();else ui->date_29->hide();
+        ui->date_30->hide();ui->date_31->hide();}
 }
 
